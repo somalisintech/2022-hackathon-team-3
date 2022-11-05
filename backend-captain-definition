@@ -9,6 +9,6 @@
     "COPY ./backend /usr/app/backend",
     "EXPOSE 6001",
 	"RUN pip install -r backend/requirements.txt",
-    "CMD uvicorn backend.routes:api --reload --port 6001"
+    "CMD uvicorn backend.routes:api --reload --host 0.0.0.0 --port 6001"
     ]
 }
