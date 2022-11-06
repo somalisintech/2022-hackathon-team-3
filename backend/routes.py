@@ -1,9 +1,22 @@
 from backend import api
 from backend import schemas
+from backend.db import Ticker, Document
 
 
 @api.post("/analyze")
 async def filter_listings(body: schemas.AnalyzeBody):
+    ticker = list(Ticker.select().where(Ticker.symbol == body.ticker))
+    if not ticker:
+        # TODO: Add status code.
+        return {
+            "error": "Ticker not found"
+        }
+
+    cik = ticker.cik
+    document = list(Document.select().where(Document.id == cik.document))
+
+
+
     result = {
         "halal": False,
         "ref_text": """Our commitment to producing the highest quality beers is a key part of our heritage and remains so to this day. 

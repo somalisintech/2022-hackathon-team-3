@@ -3,7 +3,6 @@ import os
 from peewee import (
     PostgresqlDatabase, Model, CharField,
     TextField, FloatField, BooleanField, AutoField, ForeignKeyField,
-
 )
 
 DB_NAME = os.getenv("POSTGRES_DB")
@@ -24,8 +23,8 @@ class BaseModel(Model):
 
 class Document(BaseModel):
     id = CharField(primary_key=True)
-    business_statement = TextField()
-    link = CharField()
+    business_statement = TextField(null=True)
+    link = CharField(null=True)
     processed = BooleanField(default=False)
 
 
