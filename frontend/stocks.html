@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="card.css">
+        <title>FiqhStocks</title>
+</head>
+<body>
+  
+<div class="first-container">
+    <div class="nav-container">
+      <div class="nav-row">
+          <div class="nav-logo">
+            <a id="namex" href="index.html">
+                FiqhStocks
+            </a>
+          </div>
+          <div class="nav-controls">
+
+          </div>
+
+          <div class="container" id="stocks" >
+            <div class="row" id="stocks">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card" id="stock"  style="width: 18rem;">
+                <div class="card-body">
+                    <div class="content">
+                  <h3 class="card-title" id="halal"></h3>
+                  <p class="card-text" id="ref_text"></p>
+                  <a id="ref_linkValue">Learn More</a>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+  </div>
+
+    
+</body>
+</html>
+<script>
+
+
+  halal = localStorage.getItem('halal');
+   ref_link = localStorage.getItem('ref_link');
+  ref_text =localStorage.getItem('ref_text');
+
+  halalValue=document.getElementById("halal")
+    ref_textValue=document.getElementById("ref_text")
+    ref_linkValue=document.getElementById("ref_linkValue")
+
+    
+    
+    console.log(ref_linkValue);
+    
+    if (halal === true) {
+      halalValue.innerHTML = "Possibly Halaal?";
+      ref_textValue.innerHTML = "This company appears to not sell any haraam products but please do your own due diligence";
+      ref_linkValue.innerHTML = "<a href = '"+ ref_link+"'</a>" ;
+        
+        console.log(ref_linkValue.innerHTML)
+        
+      }
+      else
+      {
+        halalValue.innerHTML = "Haraam";
+        ref_textValue.innerHTML = '<strong>why?</strong>'+'<br>"'+ref_text+'"';
+        ref_linkValue.innerHTML = "Learn More";
+        ref_linkValue.href = ref_link
+        
+        console.log(halal.innerHTML)
+      };
+      
+      
+    </script>

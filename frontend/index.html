@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="card.css">
+
+    <title>FiqhStocks 
+    </title>
+  </head>
+  
+<body>
+  
+
+<div class="first-container">
+    <div class="nav-container">
+      <div class="nav-row">
+          <div class="nav-logo">
+            <a id="name" href="index.html" >
+                FiqhStocks
+            </a>
+          </div>
+          <div class="nav-controls">
+        </div>
+          <div class="nav-controls">
+
+          </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="cover">
+        <form method="POST"  id="form" action="stocks.html">
+            
+            <div class="tb">
+                <div class="td">
+                    <input type="text" placeholder="Search A Stock" id="ticker" required>
+                </div>
+                <div class="td" id="s-cover">
+                <button type="submit">
+                    <div id="s-circle"></div>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        </form>
+      </div>
+
+
+
+</body>
+<script>    
+    var form=document.getElementById('form')
+
+form.addEventListener('submit', function(e){
+ e.preventDefault()
+
+ var ticker=document.getElementById('ticker').value
+
+ fetch('https://team3.lab.haksoat.com/analyze', {
+  method: 'POST',
+  body: JSON.stringify({
+    title:ticker,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+  })
+  .then(function(response){ 
+  return response.json()})
+  .then(function(data)
+  {console.log(data)
+    halal=document.getElementById("halal")
+    ref_text=document.getElementById("ref_text")
+    ref_link=document.getElementById("ref_link")
+
+    party = "lets party"
+
+localStorage.setItem('halal', data.halal );
+localStorage.setItem('ref_text', data.ref_text );
+localStorage.setItem('ref_link', data.ref_link );
+
+window.location.href = "stocks.html"
+
+console.log(localStorage)
+
+    console.log(localStorage.setItem('halal', halalValue))
+
+    console.log(localStorage.getItem('halal'))
+
+
+}).catch(error => console.error('Error:', error)); 
+});
+
+
+</script>
+</html>
