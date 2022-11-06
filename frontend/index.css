@@ -64,6 +64,11 @@
     font-size: 60px;
     line-height: 1;
   }
+  #logo{
+    width: 40vh;
+    padding-left: 82vh;
+
+  }
   
   input[type="text"]::placeholder {
     color: #ADADE9;
