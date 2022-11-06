@@ -8,7 +8,16 @@
 	"WORKDIR /usr/app",
     "COPY ./backend /usr/app/backend",
     "EXPOSE 6001",
+    "RUN apt-get -y install python-psycopg2",
+    "RUN apt-get -y install libpq-dev",
+    "RUN apt-get -y install postgresql-client",
 	"RUN pip install -r backend/requirements.txt",
+	"ARG POSTGRES_DB=${POSTGRES_DB}",
+	"ARG POSTGRES_HOST=${POSTGRES_HOST}",
+	"ARG POSTGRES_USER=${POSTGRES_USER}",
+	"ARG POSTGRES_PORT=${POSTGRES_PORT}",
+	"ARG PGPASSWORD=${PGPASSWORD}",
+	"RUN pem migrate",
     "CMD uvicorn backend.routes:api --reload --host 0.0.0.0 --port 6001"
     ]
 }
