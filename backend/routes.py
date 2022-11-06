@@ -1,6 +1,6 @@
 from backend import api
 from backend import schemas
-from backend.db import Ticker, Document
+from backend.db import Ticker, Document, HaramPassage
 
 
 @api.post("/analyze")
@@ -9,19 +9,19 @@ async def filter_listings(body: schemas.AnalyzeBody):
     if not ticker:
         # TODO: Add status code.
         return {
-            "error": "Ticker not found"
+            "halal": True
         }
 
-    cik = ticker.cik
-    document = list(Document.select().where(Document.id == cik.document))
+    passages = sorted(list(ticker[0].cik.document.haram_passage),
+                      key=lambda x:x.score, reverse=True)
+    if passages:
+        result = {
+            "halal": False,
+            "ref_text": passages[0].text,
+            "ref_link": ticker[0].cik.document.link
+        }
+        return result
 
-
-
-    result = {
-        "halal": False,
-        "ref_text": """Our commitment to producing the highest quality beers is a key part of our heritage and remains so to this day. 
-        Our brands are designed to appeal to a wide range of consumer tastes, styles and price preferences. 
-        Coors was incorporated in June 1913 under the laws of the state of Colorado.""",
-        "ref_link": "https://www.sec.gov/Archives/edgar/data/1652044/000165204422000019/goog-20211231.htm"
+    return {
+        "halal": True
     }
-    return result

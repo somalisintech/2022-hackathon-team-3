@@ -41,7 +41,9 @@ def dump_data():
             for idx, (score, passage) in enumerate(meta.get("top_passages", [])):
                 HaramPassage.get_or_create(
                     id=f"{doc_id}-{idx}",
-                    text=passage,
-                    score=score,
-                    document=doc
+                    defaults={
+                        "text": passage,
+                        "score": score,
+                        "document": doc
+                    }
                 )
